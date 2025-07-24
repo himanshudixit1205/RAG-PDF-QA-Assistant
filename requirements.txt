@@ -1,0 +1,6 @@
+streamlit>=1.30.0
+PyMuPDF>=1.23.0  # fitz is part of PyMuPDF
+langchain>=0.1.0 # Or specifically langchain_core, langchain_community
+langchain-community>=0.0.30 # For Ollama
+sentence-transformers>=2.2.0
+ollama>=0.1.0 # The Python client for Ollama

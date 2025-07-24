@@ -1,0 +1,28 @@
+# Ignore virtual environments
+venv/
+.env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# VSCode settings
+.vscode/
+
+# macOS system files
+.DS_Store
+
+# Logs
+*.log
+
+# Ollama internal folders
+ollama_models/
+
+# Personal Notes
+ReadingNotes.txt
+Notes.txt
