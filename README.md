@@ -63,7 +63,7 @@ Follow these steps to set up and run the application locally.
 1.  **Ensure Ollama is running** and you have the `llama3:8b` model downloaded.
 2.  **Start the Streamlit application** from your terminal in the project directory:
     ```bash
-    streamlit run pdf_qa_app.py
+    streamlit run app.py
     ```
 
 3.  Your web browser should automatically open the Streamlit application. If not, open your browser and navigate to `http://localhost:8501`.
