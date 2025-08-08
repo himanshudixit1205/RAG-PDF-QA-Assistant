@@ -69,7 +69,7 @@ Follow these steps to set up and run the application locally.
 3.  Your web browser should automatically open the Streamlit application. If not, open your browser and navigate to `http://localhost:8501`.
 ```
 ## 📂 Project Structure
-├── pdf_qa_app.py           # Main Streamlit application code
+├── app.py           # Main Streamlit application code
 ├── requirements.txt        # Python dependencies
 └── README.md               # This README file
 ```
