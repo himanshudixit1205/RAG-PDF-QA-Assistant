@@ -1,6 +1,25 @@
+# Core Frameworks
 streamlit>=1.30.0
-PyMuPDF>=1.23.0  # fitz is part of PyMuPDF
-langchain>=0.1.0 # Or specifically langchain_core, langchain_community
-langchain-community>=0.0.30 # For Ollama
+PyMuPDF>=1.23.0
+
+# LangChain Ecosystem
+langchain>=0.1.0
+langchain-community>=0.0.30
+langchain-ollama>=0.1.0
+
+# Embeddings & Vector Search
 sentence-transformers>=2.2.0
-ollama>=0.1.0 # The Python client for Ollama
+faiss-cpu>=1.7.4
+
+# Transformers (for cross-encoder)
+transformers>=4.30.0
+accelerate>=0.20.0
+
+# Deep Learning Backend
+torch>=2.0.0
+
+# Ollama Client (optional - langchain-ollama may include it)
+ollama>=0.1.0
+
+# Utilities
+numpy>=1.24.0
