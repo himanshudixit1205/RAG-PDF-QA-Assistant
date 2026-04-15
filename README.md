@@ -1,82 +1,117 @@
-# 📄 PDF Q&A Assistant with RAG (Retrieval-Augmented Generation)
+# PDF-RAG-Assistant
 
-This Streamlit application allows users to upload a PDF document and then ask questions about its content. It leverages a Retrieval-Augmented Generation (RAG) architecture to provide accurate answers by first identifying relevant sections within the PDF and then using a Large Language Model (LLM) to synthesize a response based *only* on that context.
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![RAG](https://img.shields.io/badge/RAG-Enabled-success)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## ✨ Features
+**PDF-RAG-Assistant** is an intelligent document understanding system that enables users to query PDF documents using natural language.
 
-* **PDF Text Extraction**: Efficiently extracts text from uploaded PDF documents using PyMuPDF.
-* **Intelligent Text Splitting**: Divides the extracted text into manageable, overlapping chunks using LangChain's `RecursiveCharacterTextSplitter` to preserve context.
-* **Semantic Re-ranking**: Employs a Cross-Encoder model (from `sentence-transformers`) to re-rank the document chunks based on their semantic relevance to the user's question, ensuring the most pertinent information is retrieved.
-* **Local LLM Integration**: Connects to a local Large Language Model (LLM) via Ollama (specifically `llama3:8b` by default) to generate answers. This allows for privacy, cost-efficiency, and offline usage.
-* **Streamlit UI**: Provides an intuitive and interactive web interface for seamless user experience.
-* **Performance Optimized**: Utilizes Streamlit's caching mechanisms (`@st.cache_resource`, `@st.cache_data`) to prevent redundant computations and speed up subsequent interactions after initial PDF processing.
-* **Basic Error Handling**: Includes robust error handling for PDF processing and LLM interactions.
+The system is built using a Retrieval-Augmented Generation (RAG) pipeline, combining semantic search (FAISS), cross-encoder reranking, and a local LLM (Ollama) to generate accurate and context-grounded answers.
 
-## 🛠️ Technologies Used
+---
 
-* **Python**: The core programming language.
-* **Streamlit**: For building the interactive web application.
-* **PyMuPDF (`fitz`)**: For fast and reliable PDF parsing and text extraction.
-* **LangChain**: For text splitting utilities.
-* **Sentence-Transformers**: Specifically for the Cross-Encoder re-ranking model.
-* **Ollama**: To run Large Language Models locally.
-* **Llama 3 8B Instruct**: The default LLM used for answer generation.
+## Project Highlights
 
-## 🚀 Getting Started
+- End-to-end RAG pipeline for document question answering  
+- Semantic retrieval using FAISS vector database  
+- Cross-encoder reranking for improved answer relevance  
+- Local LLM inference using Ollama (`llama3:8b`)  
+- Context-aware question answering with hallucination control  
+- Document summarization capability  
+- Optimized with caching and session state  
 
-Follow these steps to set up and run the application locally.
+---
 
-### Prerequisites
+## Table of Contents
 
-1.  **Python 3.8+**: Ensure you have Python installed.
-2.  **Ollama**: You need to have Ollama installed and running on your system.
-    * Download Ollama from: [ollama.com/download](https://ollama.com/download)
-    * Once installed, download the Llama 3 8B Instruct model by running in your terminal:
-        ```bash
-        ollama run llama3:8b
-        ```
-        (This will download the model if you don't have it. You can then `Ctrl+C` to exit the interactive mode).
-    * Verify Ollama server is running (it usually runs in the background after installation).
+- System Architecture  
+- Retrieval Pipeline  
+- Repository Structure  
+- Design Insights  
+- Known Limitations  
+- Installation  
+- Running the Application  
 
-### Installation
+---
 
-1.  **Clone the repository (or download the files):**
-    ```bash
-    git clone [https://github.com/your-username/pdf-qa-rag-app.git](https://github.com/your-username/pdf-qa-rag-app.git)
-    cd pdf-qa-rag-app
-    ```
-    (Replace `your-username` with your actual GitHub username once you upload it)
+## System Architecture
 
-2.  **Create a virtual environment (recommended):**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows: `venv\Scripts\activate`
-    ```
+PDF → Text Extraction → Chunking → Embeddings → FAISS Index  
+User Query → Query Embedding → Similarity Search → Re-ranking → LLM → Answer
 
-3.  **Install the required Python packages:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+---
 
-### Running the Application
+## Retrieval Pipeline
 
-1.  **Ensure Ollama is running** and you have the `llama3:8b` model downloaded.
-2.  **Start the Streamlit application** from your terminal in the project directory:
-    ```bash
-    streamlit run app.py
-    ```
+### Stage 1 — Dense Retrieval (FAISS)
+- Text chunks are converted into embeddings using SentenceTransformers  
+- Stored in a FAISS vector index  
+- Query is embedded and top-K similar chunks are retrieved  
 
-3.  Your web browser should automatically open the Streamlit application. If not, open your browser and navigate to `http://localhost:8501`.
-```
-## 📂 Project Structure
-├── app.py           # Main Streamlit application code
-├── requirements.txt        # Python dependencies
-└── README.md               # This README file
-```
+### Stage 2 — Cross-Encoder Re-ranking
+- Retrieved chunks are re-ranked using a CrossEncoder model  
+- Produces higher-quality, semantically aligned context  
 
-## 📝 Usage
+### Final Step — LLM Generation
+- Context is passed to a local LLM (Ollama)  
+- Model generates an answer grounded in retrieved context  
 
-1.  **Upload a PDF File**: Use the "Upload a PDF file" button to select your document.
-2.  **View Extracted Text**: A preview of the extracted text and the number of generated chunks will be displayed.
-3.  **Ask a Question**: Type your question related to the PDF content into the text area.
-4.  **Get Answer**: The application will process your question, retrieve relevant sections, and display the answer generated by the LLM.
+---
+
+## Repository Structure
+
+PDF-RAG-Assistant  
+│  
+├── app.py  
+├── requirements.txt  
+├── README.md  
+└── .gitignore  
+
+---
+
+## Design Insights
+
+- FAISS ensures fast similarity search  
+- CrossEncoder improves precision  
+- Context truncation prevents overflow  
+- Session state avoids recomputation  
+
+---
+
+## Known Limitations
+
+- Requires Ollama running locally  
+- Long context may be truncated  
+- Scanned PDFs may fail  
+- Performance depends on hardware  
+
+---
+
+## Installation
+
+pip install -r requirements.txt
+
+---
+
+## Running the Application
+
+streamlit run app.py
+
+Open in browser:
+http://localhost:8501
+
+---
+
+## Usage
+
+1. Upload a PDF  
+2. Wait for processing  
+3. Ask questions  
+4. View answers with sources  
+5. Optionally summarize document  
+
+---
+
+## Author
+Himanshu Dixit  
